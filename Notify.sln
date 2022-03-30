@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyAPI", "NotifyApi\NotifyAPI.csproj", "{49BD5C1B-94DF-4B96-B035-322EB9F0E4A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyAPI", "NotifyAPI\NotifyAPI.csproj", "{49BD5C1B-94DF-4B96-B035-322EB9F0E4A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyDB", "NotifyDB\NotifyDB.csproj", "{5A98610B-DE20-4627-9489-250FF730CB86}"
 EndProject
