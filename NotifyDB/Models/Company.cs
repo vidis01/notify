@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace NotifyDB.Models
 {
@@ -23,6 +24,7 @@ namespace NotifyDB.Models
         public List<Schedule> Schedules { get; set; }
     }
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum CompanyType
     {
         Small,
@@ -30,6 +32,7 @@ namespace NotifyDB.Models
         Large
     }
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Market
     {
         Denmark, 
