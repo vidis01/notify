@@ -18,14 +18,12 @@ namespace NotifyAPI.Controllers
             _notifyRepository = notifyRepository;
         }
 
-        // GET api/<NotityController>/5
         [HttpGet("{id}")]
         public IEnumerable<string> Get(Guid id)
         {
             return _notifyRepository.GetCompanySchedules(id);
         }
 
-        // POST api/<NotityController>
         [HttpPost]
         public async Task<Guid> Post([FromBody] CompanyDto companyDto)
         {

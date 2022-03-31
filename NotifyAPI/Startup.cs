@@ -1,19 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NotifyAPI;
 using NotifyAPI.Repositories;
 using NotifyDb;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NotifyApi
 {
@@ -38,6 +32,14 @@ namespace NotifyApi
 
             services.AddDbContext<NotifyDBContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("localdb")));
+
+            IConfigurationBuilder builder = new ConfigurationBuilder()
+                .AddJsonFile("notificationSettings.json");
+
+            var notificationSettings = new NotificationSettings();
+            builder.Build().Bind(notificationSettings);
+
+            services.AddSingleton(a => notificationSettings);
 
             services.AddScoped<INotifyRepository, NotifyRepository>();
         }
