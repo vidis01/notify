@@ -10,7 +10,7 @@ namespace NotifyAPI.DtoModel
         public string Name { get; set; }
 
         [MaxLength(10)]
-        [RegularExpression(@"^[0123456789]{10}$")]
+        [RegularExpression(@"^[0123456789]{10}$", ErrorMessage = "Only numeric characters are allowed.")]
         public string Number { get; set; }
 
         public CompanyType Type { get; set; }
