@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NotifyAPI;
+using NotifyAPI.Helpers;
 using NotifyAPI.Repositories;
 using NotifyDb;
 
@@ -59,6 +60,8 @@ namespace NotifyApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
