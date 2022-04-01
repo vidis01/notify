@@ -42,7 +42,7 @@ namespace NotifyAPI.Repositories
         {
             return _database.Schedules
                 .Where(s => s.CompanyId == companyId)
-                .Select(s => s.NotificationDate.ToString("dd/mm/yyyy")).ToList();
+                .Select(s => s.NotificationDate.ToString("dd/MM/yyyy")).ToList();
         }
 
         private async Task AddCompanySchedules(Guid companyId, CompanyDto companyDto)
