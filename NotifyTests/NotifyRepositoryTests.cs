@@ -106,6 +106,49 @@ namespace NotifyTests
             Assert.Empty(schedules);
         }
 
+        [Theory]
+        [InlineData(CompanyType.Small , Market.Denmark, 0, true )]
+        [InlineData(CompanyType.Medium, Market.Denmark, 0, true )]
+        [InlineData(CompanyType.Large , Market.Denmark, 0, true )]
+        [InlineData(CompanyType.Small , Market.Norway , 1, true )]
+        [InlineData(CompanyType.Medium, Market.Norway , 1, true )]
+        [InlineData(CompanyType.Large , Market.Norway , 1, true )]
+        [InlineData(CompanyType.Small , Market.Sweden , 2, true )]
+        [InlineData(CompanyType.Medium, Market.Sweden , 2, true )]
+        [InlineData(CompanyType.Large , Market.Sweden , 2, false)]
+        [InlineData(CompanyType.Small , Market.Finland, 3, false)]
+        [InlineData(CompanyType.Medium, Market.Finland, 3, false)]
+        [InlineData(CompanyType.Large , Market.Finland, 3, true )]
+        public async void BusinessLogicTest(CompanyType type, Market market, int settingsNumber,  bool schedulesCreated)
+        {
+            var repository = CreateRepository();
+
+            var callDate = DateTime.Now;
+
+            var companyDto = new CompanyDto
+            {
+                Name = "CompanyName",
+                Number = "1234567890",
+                Type = type,
+                Market = market,
+                CallDate = callDate
+            };
+
+            var companyId = await repository.CreateCompanyAsync(companyDto);
+            var schedules = repository.GetCompanySchedules(companyId) as List<string>;
+
+            Assert.True(companyId != Guid.Empty);
+
+            if (schedulesCreated)
+            {
+                Assert.Equal(_notificationSettings.Settings[settingsNumber].NotificationDays.Length, schedules.Count);
+            }
+            else
+            {
+                Assert.Empty(schedules);
+            }            
+        }
+
         private NotifyRepository CreateRepository()
         {
             var context = new NotifyDBContext(_dbContextOptions);
